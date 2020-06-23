@@ -30,7 +30,7 @@ add-wordtext -WordDocument $newdoc -Text "The following report details all HPA a
 ​
 Foreach ($HPAGroup in $HPAGroups) {
     $array = @()
-    $members = Get-ADGroupMember -Identity $HPAGroup | select Name, SamAccountName
+    $members = Get-ADGroupMember -Identity $HPAGroup | Select-Object Name, SamAccountName
     
     
     foreach ($member in $members) {
@@ -53,7 +53,7 @@ Foreach ($HPAGroup in $HPAGroups) {
 }
 ​
 ​
-$users = Get-aduser -filter * -searchbase "Ou=ServiceAccounts,DC=yourdomain,DC=local" -Properties * | where {$_.objectclass -eq 'user'} | Select Name, SamAccountName
+$users = Get-aduser -filter * -searchbase "Ou=ServiceAccounts,DC=yourdomain,DC=local" -Properties * | Where-Object {$_.objectclass -eq 'user'} | Select-Object Name, SamAccountName
 ​
 foreach ($user in $users) {
     $serviceaccts = [pscustomobject] @{
